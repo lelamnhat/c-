@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+#include <string.h>
+using namespace std;
+
+int n;
+int tong = 0;
+
+void nhap() {
+    cout << "nhap so n ";
+    cin >> n;
+    while (n < 1 || n > 10000) {
+        cout << "nhap lai so n ";
+        cin >> n;
+    }
+}
+
+int kiemtrauoc(int x) {
+    tong = 0; 
+    for (int i = 1; i < x; i++) {
+        if (x % i == 0) {
+            tong = tong + 1;
+        }
+    }
+    if (tong == x) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+void ketqua(int x) {
+    if (kiemtrauoc(x) == 1) {
+        cout << x << " la so hoan hao";
+    } else {
+        cout << x << " ko phai so hoan hao";
+    }
+}
+
+int main() {
+    nhap();
+    kiemtrauoc(n);
+    ketqua(n);
+    return 0;
+}
