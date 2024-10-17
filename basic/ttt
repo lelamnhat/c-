@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string.h> // Use vector for dynamic array size
+using namespace std;
+
+int n;
+int a[100]; // Use vector to handle dynamic size
+
+void nhap() { 
+    cout << "Nhap so n ";
+    cin >> n;
+    
+    
+    while (n < 0 || n > 100) {
+        cout << "Nhap lai so n ";
+        cin >> n;
+    }
+ 
+    for (int i = 0; i < n; i++) {
+        cout << "Nhap " << i << " so: ";
+        cin >> a[i];
+    }
+}
+int kemtrachanle(int i){ 
+    if (a[i] % 2 == 0) {
+        return 1 ;
+    } else {
+        return 0 ;
+    }
+}
+    void in(int x) { 
+    cout << "Cac so da nhap: ";
+    for (int i = 0; i < x; i++) { 
+        cout << a[i] << " "<< endl; 
+    }
+    cout << endl; 
+}
+
+int main() {
+    nhap();
+    in(n);
+    
+    return 0;
+}
+   
+    
+    
+   
+
