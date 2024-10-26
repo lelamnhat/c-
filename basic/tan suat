@@ -1,0 +1,69 @@
+#include<bits/stdc++.h>
+#include<limits.h>
+#include<string.h>
+#define MAX 100
+
+using namespace std;
+
+int n;
+int a[MAX];
+int dem[10];
+
+void nhap() {
+	cout<<"nhap so n: ";
+	cin>>n;
+	while( 5>n | n>MAX ) {
+		cout<<"nhap lai so n ";
+		cin>>n;
+	}
+	for(int i = 0; i<n; i++) {
+		cout<<"a["<<i<<"]: ";
+		cin>>a[i];
+	}
+}
+
+void in(int x[MAX], int size){
+    for(int i=0; i<size; i++){
+        cout<<x[i]<<" ";
+    }
+}
+
+int timmax(int x[MAX], int size){
+    int ln = INT_MIN;//-2.134.567.890
+    for(int i=0; i<size; i++){
+        if(ln < x[i]){
+            ln=x[i];
+        }
+    }
+    return ln;
+}
+
+
+void tansuat(){
+    for(int i=0; i<10; i++){
+        dem[i]=0;
+    }
+    //tim cac so tu mang a va tang gia tri xuat hien cho count
+    for(int i=0; i<n; i++){
+        dem[a[i]]++;
+    }
+    cout<<endl<<"mang dem: ";
+    in(dem,10);
+    //tim so lon nhat trong mang dem
+    int nn = timmax(dem,10);
+    cout<<endl<<"tan suat nhieu nhat: "<<nn;
+    //in ra so co tan suat xuat hien nhieu nhat
+    for(int i=9; i>0; i--){
+        if(dem[i]==nn){
+            cout<<", so "<<i;
+            break;
+        }
+    }
+}
+
+int main() {
+	nhap();
+	in(a,n);
+	tansuat();
+	return 0;
+}
