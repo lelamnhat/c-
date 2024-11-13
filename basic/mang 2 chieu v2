@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define MAX 100
+int c[n];
+int a[MAX][MAX];
+int n;
+int k;
+void nhap(int size) {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			cin >> a[i][j];
+		}
+	}
+}
+
+void in(int x[MAX][MAX], int size) {
+	cout << "Mang da nhap:\n";
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			cout << x[i][j] << " ";
+		}
+		cout << endl;
+	}
+}
+void insok(int x[MAX][MAX], int size) {
+
+	cout << "Nhap so k: ";
+	cin >> k;
+
+
+	if (k >= 0 || k < size) {
+		cout << "Dong k la: ";
+		for (int j = 0; j < size; j++) {
+			cout << x[k][j] << " ";
+		}
+		cout << endl;
+	} else {
+		cout << "k sai!" << endl;
+	}
+}
+void tinhtong() {
+	int tong = 0;
+	int m = a[k][0];
+	int n = a[k][1];
+	int p = a[k][2];
+	tong = m + n + p;
+	cout<<"tong cac so la "<<tong;
+}
+int comp(int x, int y) {
+	return x > y;
+}
+void tachmang() {
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			m[dem++] = a[i][j];
+		}
+		sort(m, m + n, comp);
+		for (int i = 0; i < n; i++) {
+			cout<<m[k]<<" ";
+		}
+	}
+}
+
+
+int main() {
+	cin>>n;
+	nhap(n);
+	in(a,n);
+	insok(a,n);
+	tinhtong();
+	sapxep();
+	return 0;
+}
