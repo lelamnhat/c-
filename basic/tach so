@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+#include<string.h>
+#define MAX 100
+using namespace std;
+int n;
+int tong;
+int a;
+int dem = 0;
+void nhap() {
+	cout<<"nhap so n: ";
+	cin>>n;
+	while( 5>n | n>100000000 ) {
+		cout<<"nhap lai so n ";
+		cin>>n;
+	}
+}
+void tachso(){
+    while(n>0){
+        int tong = n % 10;
+        n /= 10;
+        a = a + tong;
+        dem++;
+    }
+    
+}
+void in(){
+    cout<<"so da nhap "<<a<<" "<<endl;
+   cout << "Chu so: " << dem <<endl;
+   cout<<"tbc cua cac so la "<<a/dem<<endl;
+}
+int main() {
+	nhap();
+	tachso();
+	in();
+	return 0;
+}
