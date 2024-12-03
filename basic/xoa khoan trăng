@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+#include<algorithm>
+#include<string.h>
+#define MAX 100
+using namespace std;
+
+int n;
+string s;
+
+void nhap() {
+	cout << "Enter a string: ";
+	getline(cin, s);
+}
+void hoa() {
+	char kq[255];
+	int dem = 0;
+	for(int i = 0; i<s.length(); i++) {
+		char kt = char(toupper(s[i]));
+		kq[dem++] = kt;
+	}
+	cout<<kq;
+}
+void in() {
+	cout << "You entered: " << s << endl;
+}
+
+int main() {
+	nhap();
+	in();
+	hoa();
+	return 0;
+}
