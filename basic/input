@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+#include <string.h>
+using namespace std;
+
+#define INPUT "Input.inp"
+#define OUTPUT "Output.out"
+#define MAX 1000
+
+int n;
+int a[MAX];
+int res;
+FILE *fp; 
+
+void readfile() {
+    fp = fopen(INPUT, "r"); 
+    if (fp == NULL) { 
+        cout << "file not found ";
+        exit(1); 
+    } else {
+        fscanf(fp, "%d", &n); 
+        for (int i = 0; i < n; i++) {
+            fscanf(fp, "%d", &a[i]); 
+        }
+    }
+    fclose(fp);
+}
+
+void writefile() {
+    fp = fopen(OUTPUT, "w"); 
+    fprintf(fp, "%d", res); 
+    fclose(fp);                                                                                                                                                                                              
+}
+void timmax() {                                         
+    int max = a[0]; 
+    for (int i = 1; i < n; i++) {
+        if (max < a[i]) {
+            max = a[i];
+        }
+    }
+    res = max; 
+}
+
+int main() {
+    readfile();
+    timmax(); 
+    writefile(); 
+    return 0;
+}
