@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int n;
+
+void nhap() {
+    cout << "Nhap so n: ";
+    cin >> n;
+    while (n < 1 || n > 10000) {
+        cout << "Nhap lai so n (1 <= n <= 10000): ";
+        cin >> n;
+    }
+}
+
+int tong(int x) {
+    if (x == 0) {
+        return 0; 
+    }
+    return x * x + tong(x - 1);
+}
+
+void in(int k) {
+    cout << "Tong binh phuong tu 1 den " << n << " la: " << k << endl;
+}
+
+int main() {
+    nhap();
+    int k = tong(n); 
+    in(k);
+    return 0;
+}
