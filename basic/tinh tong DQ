@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int n;
+
+void nhap() {
+    cout << "Nhap so n: ";
+    cin >> n;
+    while (n < 1 || n > 10000) {
+        cout << "Nhap lai so n (1 <= n <= 10000): ";
+        cin >> n;
+    }
+}
+
+float tong(int x) {
+    if (x == 1) {
+        return 1.0; 
+    }
+    float sum = 1.0 / x + tong(x - 1);
+    return sum;
+}
+
+void in(float k) {
+    cout << "Tong tu 1/1 den 1/" << n << " la: " << k << endl;
+}
+
+int main() {
+    nhap();
+    float k = tong(n); 
+    in(k);
+    return 0;
+}
