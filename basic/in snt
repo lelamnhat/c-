@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void insonguyento(int n) {
+
+	bool a[n + 1];
+	for (int i = 0; i <= n; i++) {
+		a[i] = true;
+	}
+
+	a[0] = a[1] = false;
+
+
+	for (int i = 2; i * i <= n; i++) {
+
+		if (a[i]) {
+
+			for (int j = i * i; j <= n; j += i) {
+				a[j] = false;
+			}
+		}
+	}
+
+
+	cout << "Cac so nguyen to la ";
+	for (int i = 2; i <= n; i++) {
+		if (a[i]) {
+			cout << i << " ";
+		}
+	}
+	cout << endl;
+}
+
+int main() {
+	int n;
+	cout << "Nhap n: ";
+	cin >> n;
+	insonguyento(n);
+	return 0;
+}
