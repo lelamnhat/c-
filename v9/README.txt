@@ -4,7 +4,7 @@ Bản quyền Solver Team
 Chủ trì dự án Hillary ADMIN
 đóng góp gồm
 Giao Diện Hitomi Hillary
-HTML Hitori hillary
+HTML Hitori Hillary , 
 CSS Minh Nguyễn
 JAVA script Hitori Hillary
 các bộ phận tham gia
