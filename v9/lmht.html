@@ -1,0 +1,182 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nick Liên Minh - Shop Game Uy Tín</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-white shadow sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center">
+        <img src="https://via.placeholder.com/150x50?text=Logo" alt="Logo" class="h-12">
+      </div>
+      <div class="flex-1 mx-4 hidden md:block">
+        <input type="text" id="search-input" placeholder="Tìm kiếm nick Liên Minh..." class="w-full p-2 rounded border focus:outline-none focus:ring-2 focus:ring-red-500">
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="cart.html" class="text-red-600 relative"><i class="bx bx-cart text-2xl"></i></a>
+        <a href="login.html" class="text-red-600"><i class="bx bx-user text-2xl"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <nav class="bg-gray-800 text-white">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+      <ul class="flex space-x-6 overflow-x-auto">
+        <li><a href="index.html" class="hover:text-red-500 font-medium">Trang chủ</a></li>
+        <li><a href="lien-quan.html" class="hover:text-red-500 font-medium">Nick Liên Quân</a></li>
+        <li><a href="free-fire.html" class="hover:text-red-500 font-medium">Free Fire</a></li>
+        <li><a href="roblox.html" class="hover:text-red-500 font-medium">Roblox</a></li>
+        <li><a href="lmht.html" class="text-red-500 font-medium">Liên Minh</a></li>
+        <li><a href="tui-mu.html" class="hover:text-red-500 font-medium">Túi Mù</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="max-w-7xl mx-auto px-4 py-6">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="https://via.placeholder.com/1200x400?text=Banner+LMHT" alt="Banner Liên Minh">
+          <div class="banner-text">
+            <h2 class="text-2xl md:text-3xl font-bold">Nick Liên Minh Rank Cao</h2>
+            <p class="mt-2 text-sm md:text-base">Sở hữu acc rank cao, full skin đẹp!</p>
+            <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Mua Ngay</button>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 py-6">
+    <h2 class="text-2xl font-bold mb-6">Nick Liên Minh Nổi Bật</h2>
+    <div id="product-list" class="space-y-6"></div>
+    <div class="text-center mt-6">
+      <button class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600">Xem thêm sản phẩm</button>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div>
+        <img src="https://via.placeholder.com/150x50?text=Logo" alt="Logo" class="h-12 mb-3">
+        <p class="text-sm">Shop Game Liên Quân Uy Tín - Chất Lượng Số 1 Việt Nam.</p>
+        <p class="text-sm mt-2"><a href="/policy" class="hover:text-red-500">Chính sách bảo hành</a> | <a href="/terms" class="hover:text-red-500">Điều khoản dịch vụ</a></p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Thông Tin Chung</h3>
+        <ul class="text-sm">
+          <li><a href="/policy" class="hover:text-red-500">Chính Sách Bảo Hành</a></li>
+          <li><a href="/guide" class="hover:text-red-500">Hướng Dẫn Nạp Tiền</a></li>
+          <li><a href="/guide-account" class="hover:text-red-500">Hướng Dẫn Đổi Thông Tin Nick</a></li>
+          <li><a href="/guide-login" class="hover:text-red-500">Hướng Dẫn Đăng Nhập Game</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Sản Phẩm</h3>
+        <ul class="text-sm">
+          <li><a href="lien-quan.html" class="hover:text-red-500">Nick Liên Quân Giá Rẻ</a></li>
+          <li><a href="free-fire.html" class="hover:text-red-500">Nick Free Fire</a></li>
+          <li><a href="roblox.html" class="hover:text-red-500">Dịch Vụ Roblox</a></li>
+          <li><a href="lmht.html" class="hover:text-red-500">Nick Liên Minh Huyền Thoại</a></li>
+          <li><a href="tui-mu.html" class="hover:text-red-500">Thử Vận May Túi Mù</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-3">Hỗ Trợ Khách Hàng</h3>
+        <p class="text-sm mb-2">Hỗ trợ 24/7 qua:</p>
+        <a href="https://m.me/145190578667372" target="_blank">
+          <img src="https://via.placeholder.com/200x50?text=Messenger" alt="Messenger" class="w-40 mb-2">
+        </a>
+        <a href="https://zalo.me/0945055656" target="_blank">
+          <img src="https://via.placeholder.com/50?text=Zalo" alt="Zalo" class="w-10">
+        </a>
+      </div>
+    </div>
+    <div class="mt-4 border-t border-gray-800 pt-2 text-center">
+      <p class="text-sm">© Copyright 2023. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <div class="fixed bottom-4 right-4 z-50">
+    <div class="bg-red-500 text-white p-3 rounded-full cursor-pointer hover:bg-red-600">Hỗ trợ</div>
+    <div class="mt-2 space-y-2">
+      <a href="https://m.me/145190578667372" target="_blank" class="block bg-blue-600 p-3 rounded-full">
+        <i class="bx bxl-facebook-circle text-2xl"></i>
+      </a>
+      <a href="https://zalo.me/0945055656" target="_blank" class="block bg-green-600 p-3 rounded-full">
+        <img src="https://via.placeholder.com/24?text=Zalo" alt="Zalo" class="h-6 w-6">
+      </a>
+    </div>
+  </div>
+
+  <div class="md:hidden bg-white border-t fixed bottom-0 left-0 right-0 flex justify-around py-2 z-10">
+    <a href="index.html" class="flex flex-col items-center text-red-600">
+      <i class="bx bx-home-circle text-2xl nav-icon"></i>
+      <span class="text-xs font-bold">Trang chủ</span>
+    </a>
+    <a href="cart.html" class="flex flex-col items-center text-gray-700">
+      <i class="bx bx-cart text-2xl nav-icon"></i>
+      <span class="text-xs font-bold">Giỏ hàng</span>
+    </a>
+    <a href="/recharge" class="flex flex-col items-center text-gray-700">
+      <i class="bx bx-wallet-alt text-2xl nav-icon"></i>
+      <span class="text-xs font-bold">Nạp tiền</span>
+    </a>
+    <a href="login.html" class="flex flex-col items-center text-gray-700">
+      <i class="bx bx-user text-2xl nav-icon"></i>
+      <span class="text-xs font-bold">Tài khoản</span>
+    </a>
+  </div>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>
