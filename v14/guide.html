@@ -1,0 +1,117 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html"><img src="https://via.placeholder.com/150x50?text=Logo" alt="Logo"></a>
+      <nav>
+        <ul class="flex space-x-6">
+          <li><a href="index.html" class="text-gray-600 hover:text-red-500">Trang chủ</a></li>
+          <li><a href="lien-quan.html" class="text-gray-600 hover:text-red-500">Liên Quân</a></li>
+          <li><a href="free-fire.html" class="text-gray-600 hover:text-red-500">Free Fire</a></li>
+          <li><a href="roblox.html" class="text-gray-600 hover:text-red-500">Roblox</a></li>
+          <li><a href="lmht.html" class="text-gray-600 hover:text-red-500">LMHT</a></li>
+          <li><a href="notifications.html" class="text-gray-600 hover:text-red-500">Thông báo</a></li>
+          <li><a href="guide.html" class="text-gray-600 hover:text-red-500 active">Hướng dẫn</a></li>
+          <li><a href="policy.html" class="text-gray-600 hover:text-red-500">Chính sách</a></li>
+          <li><a href="register.html" class="text-gray-600 hover:text-red-500">Đăng ký</a></li>
+          <li><a href="login.html" class="text-gray-600 hover:text-red-500">Đăng nhập</a></li>
+          <li><a href="recharge.html" class="text-gray-600 hover:text-red-500">Nạp tiền</a></li>
+          <li><a href="cart.html" class="text-gray-600 hover:text-red-500 relative"><i class="bx bx-cart text-xl"></i></a></li>
+          <li><span id="wallet-balance" class="text-gray-600">Ví: 0 VNĐ</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Hướng Dẫn Sử Dụng</h1>
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-4">1. Đăng Nhập</h2>
+      <p class="text-gray-600 mb-4">Hướng dẫn cách đăng nhập vào hệ thống:</p>
+      <ul class="list-disc pl-6 text-gray-600">
+        <li>Truy cập trang <a href="login.html" class="text-red-500 hover:underline">Đăng nhập</a>.</li>
+        <li>Nhập tên đăng nhập hoặc email và mật khẩu (mật khẩu mặc định: 123456).</li>
+        <li>Nhấn "Đăng nhập" để truy cập tài khoản.</li>
+      </ul>
+      <div class="mt-4">
+        <iframe class="w-full h-64 md:h-96" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+    <section>
+      <h2 class="text-xl font-semibold mb-4">2. Đổi Thông Tin Tài Khoản</h2>
+      <p class="text-gray-600 mb-4">Hướng dẫn đổi thông tin tài khoản:</p>
+      <ul class="list-disc pl-6 text-gray-600">
+        <li>Đăng nhập vào tài khoản của bạn.</li>
+        <li>Truy cập mục "Tài khoản" (hiện chưa khả dụng, liên hệ hỗ trợ).</li>
+        <li>Cập nhật thông tin và lưu lại.</li>
+      </ul>
+      <div class="mt-4">
+        <iframe class="w-full h-64 md:h-96" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+  </main>
+
+  <div id="notification" class="hidden fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow"></div>
+
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p>&copy; 2025 Shop Game. All rights reserved.</p>
+      <div class="mt-4">
+        <a href="policy.html" class="text-gray-400 hover:text-red-500 mx-2">Chính sách</a>
+        <a href="guide.html" class="text-gray-400 hover:text-red-500 mx-2">Hướng dẫn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="scripts.js"></script>
+</body>
+</html>
