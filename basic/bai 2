@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, d;
+    cin >> n >> d;
+    if ((n - 3 * d) % 3 != 0) {
+        cout << "-1" << endl;
+        return 0;
+    }
+
+    int v = (n - 3 * d) / 3;
+    int b = v + d;
+    int đ = b + d;
+
+    if (v <= 0 || b <= 0 || đ <= 0) {
+        cout << "-1" << endl;
+    } else {
+        cout << v << " " << b << " " << đ << endl;
+    }
+
+    return 0;
+}
