@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+int main() {
+    FILE *fp = fopen("INPUT.txt", "r");
+    if (fp == NULL) {
+        printf("File not found\n");
+        return 1;
+    }
+
+    int n;
+    fscanf(fp, "%d", &n);
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        fscanf(fp, "%d", &a[i]);
+    }
+
+    int count[1000] = {0}; // Mảng đếm số lần xuất hiện, giả sử giá trị tối đa là 1000
+    for (int i = 0; i < n; i++) {
+        count[a[i]]++;
+    }
+
+    int min = INT_MAX;
+    for (int i = 0; i < 1000; i++) {
+        if (count[i] > 0 && count[i] < min) {
+            min = count[i];
+        }
+    }
+
+    printf("So lan xuat hien nho nhat: %d\n", min);
+    fclose(fp);
+    return 0;
+}
