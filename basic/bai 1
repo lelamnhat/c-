@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int m;
+int d;
+int dem = 0;
+
+void nhap() {
+    cin >> m >> d;
+}
+
+void tinh() {
+    if (d % 2 == 1) {
+        dem += 1;
+    }
+    if (m % 2 == 1) {
+        dem += 1;
+    }
+
+    if (dem == 0) {
+        cout << "0" << endl;
+    } else if (dem == 1) {
+        cout << "0" << endl;
+    } else if (dem == 2) {
+        cout << "1" << endl;
+    }
+}
+
+int main() {
+    nhap();
+    tinh();
+    return 0;
+}
