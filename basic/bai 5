@@ -1,0 +1,42 @@
+#include <iostream>
+#include <algorithm> 
+using namespace std;
+
+
+long long A[MAX]; 
+
+int main() {
+    int n;
+    cin >> n;
+    
+    
+    long long tong = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> A[i];
+        tong = max(tong, A[i]);
+    }
+    
+    
+    sort(A, A + n);
+    
+    
+    long long tamgiac = 0;
+    int i = 0;
+    while (i < n) {
+        
+        long long dem = 0;
+        long long current_length = A[i];
+        while (i < n && A[i] == dem) {
+            dem++;
+            i++;
+        }
+        if (count >= 3) {
+            tamgiac += (dem * (dem - 1) * (dem - 2)) / 6;
+        }
+    }
+    
+   
+    cout << tamgiac << " " << max_length << endl;
+    
+    return 0;
+}
