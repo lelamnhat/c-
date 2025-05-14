@@ -1,77 +1,69 @@
-#include<bits/stdc++.h> // Bao gồm thư viện chuẩn C++ chứa hầu hết các thư viện cần thiết (iostream, vector, algorithm, v.v.)
-#include<limits.h> // Bao gồm thư viện để sử dụng các hằng số như INT_MIN (giá trị nguyên nhỏ nhất)
-#include<string.h> // Bao gồm thư viện để xử lý chuỗi (dù không được sử dụng trong chương trình này)
-#define MAX 100 // Định nghĩa hằng số MAX = 100, là kích thước tối đa của mảng
+#include<bits/stdc++.h>
+#include<limits.h>
+#include<string.h>
+#define MAX 100
 
-using namespace std; // Sử dụng không gian tên std để tránh phải viết std:: trước các đối tượng như cout, cin
+using namespace std;
 
-int n; // Biến toàn cục n, lưu số lượng phần tử của mảng a
-int a[MAX]; // Mảng toàn cục a, lưu các phần tử người dùng nhập
-int dem[MAX]; // Mảng toàn cục dem, lưu tần suất xuất hiện của các số trong mảng a
+int n;
+int a[MAX];
+int dem[10];
 
-// Hàm nhap: Nhập số lượng phần tử và các phần tử của mảng a
 void nhap() {
-    cout << "nhap so n: "; // In ra thông báo yêu cầu nhập n
-    cin >> n; // Nhập số lượng phần tử n
-    // Kiểm tra điều kiện: n phải nằm trong khoảng từ 5 đến MAX (100)
-    while (5 > n || n > MAX) { // Nếu n < 5 hoặc n > MAX
-        cout << "nhap lai so n "; // Yêu cầu nhập lại n
-        cin >> n; // Nhập lại n
-    }
-    // Nhập các phần tử của mảng a
-    for (int i = 0; i < n; i++) {
-        cout << "a[" << i << "]: "; // In ra chỉ số phần tử cần nhập
-        cin >> a[i]; // Nhập giá trị cho phần tử a[i]
+	cout<<"nhap so n: ";
+	cin>>n;
+	while( 5>n | n>MAX ) {
+		cout<<"nhap lai so n ";
+		cin>>n;
+	}
+	for(int i = 0; i<n; i++) {
+		cout<<"a["<<i<<"]: ";
+		cin>>a[i];
+	}
+}
+
+void in(int x[MAX], int size){
+    for(int i=0; i<size; i++){
+        cout<<x[i]<<" ";
     }
 }
 
-// Hàm in: In các phần tử của một mảng
-void in(int x[MAX], int size) { // Nhận tham số: mảng x và kích thước size
-    for (int i = 0; i < size; i++) { // Duyệt qua từng phần tử của mảng
-        cout << x[i] << " "; // In phần tử x[i] kèm dấu cách
-    }
-}
-
-// Hàm timmax: Tìm giá trị lớn nhất trong mảng
-int timmax(int x[MAX], int size) { // Nhận tham số: mảng x và kích thước size
-    int ln = INT_MIN; // Khởi tạo ln (lớn nhất) bằng giá trị nhỏ nhất của int (-2,147,483,648)
-    for (int i = 0; i < size; i++) { // Duyệt qua từng phần tử của mảng
-        if (ln < x[i]) { // Nếu phần tử x[i] lớn hơn ln
-            ln = x[i]; // Cập nhật ln bằng x[i]
+int timmax(int x[MAX], int size){
+    int ln = INT_MIN;//-2.134.567.890
+    for(int i=0; i<size; i++){
+        if(ln < x[i]){
+            ln=x[i];
         }
     }
-    return ln; // Trả về giá trị lớn nhất tìm được
+    return ln;
 }
 
-// Hàm tansuat: Tính và in tần suất xuất hiện của các số trong mảng a
-void tansuat() {
-    // Khởi tạo mảng dem với tất cả giá trị bằng 0
-    for (int i = 0; i < MAX; i++) {
-        dem[i] = 0; // Đặt tần suất của mọi số về 0
+
+void tansuat(){
+    for(int i=0; i<10; i++){
+        dem[i]=0;
     }
-    // Đếm tần suất xuất hiện của các số trong mảng a
-    for (int i = 0; i < n; i++) {
-        dem[a[i]]++; // Tăng tần suất của số a[i] lên 1
-        // Lưu ý: Giả định a[i] là số không âm và nhỏ hơn MAX
+    //tim cac so tu mang a va tang gia tri xuat hien cho count
+    for(int i=0; i<n; i++){
+        dem[a[i]]++;
     }
-    cout << endl << "mang dem: "; // In tiêu đề mảng tần suất
-    in(dem, MAX); // In mảng dem (tần suất của các số từ 0 đến MAX-1)
-    // Tìm tần suất lớn nhất trong mảng dem
-    int nn = timmax(dem, MAX); // Gọi hàm timmax để tìm tần suất lớn nhất
-    cout << endl << "tan suat nhieu nhat: " << nn; // In tần suất lớn nhất
-    // Tìm và in số có tần suất lớn nhất
-    for (int i = 9; i > 0; i--) { // Duyệt từ 9 xuống 1 (chỉ xét các số từ 1 đến 9)
-        if (dem[i] == nn) { // Nếu tần suất của số i bằng tần suất lớn nhất
-            cout << ", so " << i; // In số i
-            break; // Thoát vòng lặp sau khi tìm thấy số đầu tiên
+    cout<<endl<<"mang dem: ";
+    in(dem,10);
+    //tim so lon nhat trong mang dem
+    int nn = timmax(dem,10);
+    cout<<endl<<"tan suat nhieu nhat: "<<nn;
+    //in ra so co tan suat xuat hien nhieu nhat
+    for(int i=9; i>0; i--){
+        if(dem[i]==nn){
+            cout<<", so "<<i;
+            break;
         }
     }
 }
 
-// Hàm main: Hàm chính của chương trình
 int main() {
-    nhap(); // Gọi hàm nhap để nhập dữ liệu
-    in(a, n); // Gọi hàm in để in mảng a
-    tansuat(); // Gọi hàm tansuat để tính và in tần suất
-    return 0; // Kết thúc chương trình
+	nhap();
+	in(a,n);
+	tansuat();
+	return 0;
 }
