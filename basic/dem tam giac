@@ -1,0 +1,63 @@
+#include<bits/stdc++.h>
+#include<limits.h>
+#include<string.h>
+#define MAX 1000000
+
+using namespace std;
+
+int n;
+int a[MAX];
+int dem[MAX];
+
+void nhap() {
+    cin>>n;
+    for(int i = 0; i<n; i++) {
+        cin>>a[i];
+    }
+}
+
+void in(int x[MAX], int size) {
+    for(int i=0; i<size; i++) {
+        cout<<x[i]<<" ";
+    }
+}
+
+int timmax(int x[MAX], int size) {
+    int ln = INT_MIN;
+    for(int i=0; i<size; i++) {
+        if(ln < x[i]) {
+            ln=x[i];
+        }
+    }
+    return ln;
+}
+
+void tansuat() {
+    for(int i=0; i<MAX; i++) {
+        dem[i]=0;
+    }
+    for(int i=0; i<n; i++) {
+        dem[a[i]]++;
+    }
+    int tamgiac = 0;
+    int canhkoghep = 0; 
+    for (int i = 0; i < MAX; i++) {
+        if (dem[i] >= 3) { 
+            int c = dem[i] / 3;
+            tamgiac += c; 
+            canhkoghep += dem[i] % 3;
+        } else {
+            canhkoghep += dem[i];
+        }
+    }
+    cout << tamgiac<< " ";
+    cout << canhkoghep;
+}
+
+
+
+int main() {
+    nhap();
+    tansuat();
+    return 0;
+}
