@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    
+    int sum = 0;
+    int c = 0, l = 0;
+    
+   
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        sum += x; 
+        if (x % 2 == 0) {
+            c++; 
+        } else {
+           l++; 
+        }
+    }
+    
+    int tong = 0;
+
+    if (sum % 2 == 0) {
+  
+        tong += (int)c * (c - 1) / 2;
+   
+       tong += (int)l * (l - 1) / 2;
+    } else {
+       
+        tong = (int)c * l;
+    }
+    
+   
+    if (tong == 0) {
+        cout << -1 << endl;
+    } else {
+        cout << tong << endl;
+    }
+    
+    return 0;
+}
