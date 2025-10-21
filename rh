@@ -1,0 +1,26 @@
+
+n = int(input("Nhập số phần tử của dãy (n > 5): "))
+
+# Nhập các phần tử của dãy A
+A = []
+for i in range(n):
+    x = int(input(f"Nhập phần tử thứ {i+1}: "))
+    A.append(x)
+
+# a) In dãy ra màn hình
+print("Dãy A vừa nhập là:", A)
+
+# b) Xóa phần tử đầu tiên của dãy
+A.pop(0)
+print("Dãy sau khi xóa phần tử đầu tiên:", A)
+
+# c) Tìm số lớn nhất và nhỏ nhất trong dãy
+max_value = max(A)
+min_value = min(A)
+print("Số lớn nhất trong dãy là:", max_value)
+print("Số nhỏ nhất trong dãy là:", min_value)
+
+# d) Thêm 1 phần tử vào cuối dãy
+them = int(input("Nhập phần tử muốn thêm vào cuối dãy: "))
+A.append(them)
+print("Dãy sau khi thêm phần tử:", A)
